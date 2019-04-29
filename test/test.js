@@ -1,0 +1,42 @@
+const test = require('ava');
+
+const Script = require('..');
+const { beforeEach, afterEach } = require('./helpers');
+
+test.beforeEach(beforeEach);
+test.afterEach(afterEach);
+
+test('returns itself', t => {
+  t.true(t.context.script instanceof Script);
+});
+
+test('sets a config object', t => {
+  const script = new Script(false);
+  t.true(script instanceof Script);
+});
+
+test('renders name', t => {
+  const { script } = t.context;
+  t.is(script.renderName(), 'script');
+});
+
+test('sets a default name', t => {
+  const { script } = t.context;
+  t.is(script._name, 'script');
+});
+test('User Registration', async t=>{
+  const email = 'humaidokasha@mail.com'
+  const password = 'todo123'
+  const response = await request
+  .post('/user/register').send({email,password})
+  t.is(response.status, 200)
+  t.is(response.body.message, 'User Registered Successfully')
+})
+
+test('Reset Password', async t=>{
+  const email = 'humaidokasha@gmail.com'
+  const response = await request
+  .post('/reset/password').send({email})
+  t.is(response.status, 200)
+  t.is(response.body.message, 'Reset link sent successfully')
+})

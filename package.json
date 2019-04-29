@@ -1,0 +1,118 @@
+{
+    "name": "todoapp",
+    "description": "todoapp",
+    "version": "1.0.0",
+    "author": "humaidokasha <humaidokasha@gmail.com> ()",
+    "bugs": {
+        "url": "https://github.com/humaidokasha/todoappserver/issues",
+        "email": "humaidokasha@gmail.com"
+    },
+    "contributors": [
+        "humaidokasha <humaidokasha@gmail.com> ()"
+    ],
+    "dependencies": {
+        "fastify": "^2.3.0",
+        "fcm-node": "^1.4.0"
+    },
+    "ava": {
+        "failFast": true,
+        "verbose": true
+    },
+    "devDependencies": {
+        "@commitlint/cli": "latest",
+        "@commitlint/config-conventional": "latest",
+        "ava": "latest",
+        "codecov": "latest",
+        "cross-env": "latest",
+        "eslint": "latest",
+        "eslint-config-prettier": "latest",
+        "eslint-config-xo-lass": "latest",
+        "eslint-plugin-prettier": "latest",
+        "fixpack": "latest",
+        "husky": "latest",
+        "lint-staged": "latest",
+        "nodemon": "^1.18.11",
+        "nyc": "latest",
+        "prettier": "latest",
+        "remark-cli": "latest",
+        "remark-preset-github": "latest",
+        "xo": "latest"
+    },
+    "engines": {
+        "node": ">=8.3"
+    },
+    "homepage": "https://github.com/humaidokasha/todoappserver",
+    "keywords": [
+        "todoapp",
+        "lass"
+    ],
+    "license": "MIT",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged && npm test",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "lint-staged": {
+        "linters": {
+            "*.js": [
+                "xo --fix",
+                "git add"
+            ],
+            "*.md": [
+                "remark . -qfo",
+                "git add"
+            ],
+            "package.json": [
+                "fixpack",
+                "git add"
+            ]
+        }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "main": "index.js",
+    "nyc": {
+        "check-coverage": true,
+        "lines": 100,
+        "functions": 100,
+        "branches": 100,
+        "reporter": [
+            "lcov",
+            "html",
+            "text"
+        ]
+    },
+    "remarkConfig": {
+        "plugins": [
+            "preset-github"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/humaidokasha/todoappserver"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "bracketSpacing": true,
+        "trailingComma": "none"
+    },
+    "xo": {
+        "prettier": true,
+        "space": true,
+        "extends": [
+            "xo-lass"
+        ]
+    },
+    "scripts": {
+        "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+        "lint": "xo && remark . -qfo",
+        "test": "npm run ava",
+        "test-coverage": "npm run nyc",
+        "ava": "cross-env NODE_ENV=test ava",
+        "nyc": "cross-env NODE_ENV=test nyc ava"
+    }
+}
